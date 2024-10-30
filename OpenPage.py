@@ -31,7 +31,7 @@ class OpenPage:
     def clickThrough(self): #has to be implemented in subclass 
         raise NotImplementedError
 
-class PublixClick(OpenPage):
+class InglesClick(OpenPage):
     def __init__(self, url):
         super().__init__(url)
 
@@ -76,16 +76,15 @@ class PublixClick(OpenPage):
             self.driver.get("https://flyer.inglesads.com/noncard/ThisWeek/ReviewAllSpecials.jsp")
 
         except Exception as e:
-            print("Error selecting option:", e)
+            print("Error Clickin Through:", e)
 
-    def getProductDetails(self):
+    def getProductDetailsIngles(self, products):
         try:
             # Wait for the products to load
             WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'treport')))
             
             # Find all product offer blocks
             offer_blocks = self.driver.find_elements(By.CLASS_NAME, 'offerblock')
-            products = []
 
             for block in offer_blocks:
                 # Extract product image URL
@@ -165,15 +164,25 @@ class StoreToDatabase:
             self.connection.close()
             print("MySQL connection is closed")
 
-        
+class GetAllProducts():
+    def __init__(self):
+        self.urlIngles = "https://flyer.inglesads.com/noncard/ThisWeek/SelectStore.jsp?lm=1"
+        self.urlAldi = ""
+        self.urlPublix = ""
+        self.products = []
+    def getAllProducts(self):
+        clickTh = InglesClick(self.urlIngles) 
+        clickTh.openPage()
+        clickTh.clickThrough()
+        self.products = clickTh.getProductDetailsIngles(self.products)
+        clickTh.quitDriver()
+        return self.products
+
 if __name__ == '__main__':
     url = "https://flyer.inglesads.com/noncard/ThisWeek/SelectStore.jsp?lm=1"
-    clickTh = PublixClick(url) 
-    clickTh.openPage()
-    clickTh.clickThrough()
-    productDetails = clickTh.getProductDetails()
+    productDetails = GetAllProducts().getAllProducts()
     store_db = StoreToDatabase()
     stored_products = store_db.storeToDatabase(productDetails)
     print("Stored Products:", stored_products)
     store_db.closeConnection()
-    clickTh.quitDriver()
+    
