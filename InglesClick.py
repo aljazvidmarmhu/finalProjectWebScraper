@@ -46,7 +46,7 @@ class InglesClick(OpenPage):
         except Exception as e:
             print("Error Clickin Through:", e)
 
-    def getProductDetailsIngles(self, products):
+    def getProductDetails(self, products):
         try:
             # Wait for the products to load
             WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'treport')))

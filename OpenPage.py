@@ -4,6 +4,9 @@ class OpenPage:
     def __init__(self, url):
         self.url = url
         self.options = Options()
+        self.options.set_preference("geo.prompt.testing", True)  # Enable location prompt testing
+        self.options.set_preference("geo.prompt.testing.allow", True) 
+        self.options.set_preference("geo.enabled", True)  # Disable geolocation
         #self.options.add_argument('--headless')  # Run Firefox in headless mode
         # Initialize the Firefox WebDriver with specified options
         self.driver = webdriver.Firefox(options=self.options) # Update geckodriver path if needed
