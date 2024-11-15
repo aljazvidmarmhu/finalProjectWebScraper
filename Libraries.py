@@ -13,3 +13,4 @@ from StoreToDatabase import StoreToDatabase
 from GetAllProducts import GetAllProducts
 from PublixClick import PublixClick
 from selenium.webdriver.common.action_chains import ActionChains
+from WholeFoodsClick import WholeFoodsClick
