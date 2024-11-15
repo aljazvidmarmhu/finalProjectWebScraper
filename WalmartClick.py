@@ -1,37 +1,18 @@
 
 #does not work properly
 
-
 from Libraries import *
-class AldiClick(OpenPage):
+
+class WalmartClick(OpenPage):
     def __init__(self, url):
         super().__init__(url)
 
     def clickThrough(self):
         try:
-            # Wait for the dropdown to be present
-
-            cookieBtn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'onetrust-accept-btn-handler')))
-            cookieBtn.click()
-            time.sleep(2)
-            button = self.driver.find_element(By.CSS_SELECTOR, '.select-merchant-feature-bar__service-address')
-            self.driver.execute_script("arguments[0].click();", button)
-            time.sleep(2)
-            continue_button = WebDriverWait(self.driver, 10).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[data-test="change-merchant-alert_btn-confirm"]'))
-            )
-            continue_button.click()
-            zip_input = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((By.ID, "merchant-zip-code-input"))
-            )
-            zip_input.clear()  # Clear any pre-existing text if needed
-            zip_input.send_keys("28787")
-            select_button = WebDriverWait(self.driver, 10).until(
-                EC.element_to_be_clickable((By.CLASS_NAME, "service-selector-search-dialog__store-select-btn"))
-            )
-            select_button.click()
-            self.driver.get("https://new.aldi.us/weekly-specials/weekly-ads")
-        
+            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '[data-testid="item-stack"]')))
+            print("found all")
+            element1 = element.find_element("id", "zaKlOMVogIdTrwN")
+            
         except Exception as e:
             print("Error Clickin Through:", e)
 
@@ -55,7 +36,7 @@ class AldiClick(OpenPage):
                     'productName': name,
                     'price': price,
                     'imageURL': image_link,   
-                    'store' : "Aldi"
+                    'store' : "Publix"
                 })
             
             return products
@@ -65,9 +46,9 @@ class AldiClick(OpenPage):
             return []
         
 if __name__ == '__main__':
-    url = "https://new.aldi.us"
+    url = "https://www.walmart.com/shop/deals/food?povid=FallSavings_Facet_Food"
     products = []
-    clickTh = AldiClick(url)
+    clickTh = WalmartClick(url)
     clickTh.openPage()
     clickTh.clickThrough()
     products = clickTh.getProductDetails(products)
