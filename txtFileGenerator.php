@@ -1,8 +1,9 @@
 <?php
 // Database connection details
-$databaseName = "finalProject";
-$databaseTableName = "finalProjectTable";
-$databasePassword = "finalProject2024!";
+// Ensure you replace the following variables with your actual database credentials
+$databaseName = "<your_database_name>";  // Replace with your actual database name
+$databaseTableName = "<your_table_name>";  // Replace with your actual table name
+$databasePassword = "<your_password>";  // Replace with your actual database password
 $databaseHost = "localhost";  // Change if needed
 $databaseUser = "root";  // Your MySQL username
 

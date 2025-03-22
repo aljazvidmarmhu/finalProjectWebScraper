@@ -9,7 +9,7 @@ class AldiClick(OpenPage):
 
     def clickThrough(self):
         try:
-            # Wait for the dropdown to be present
+           
 
             cookieBtn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'onetrust-accept-btn-handler')))
             cookieBtn.click()
@@ -24,7 +24,7 @@ class AldiClick(OpenPage):
             zip_input = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_element_located((By.ID, "merchant-zip-code-input"))
             )
-            zip_input.clear()  # Clear any pre-existing text if needed
+            zip_input.clear() 
             zip_input.send_keys("28787")
             select_button = WebDriverWait(self.driver, 10).until(
                 EC.element_to_be_clickable((By.CLASS_NAME, "service-selector-search-dialog__store-select-btn"))
@@ -38,7 +38,7 @@ class AldiClick(OpenPage):
     def getProductDetails(self, products):
         try:
             items = self.driver.find_elements(By.CLASS_NAME, 'p-grid-item')
-            # Wait for the products to load
+           
             for item in items:
              # Extract the image link
                 image_element = item.find_element(By.CSS_SELECTOR, 'img')

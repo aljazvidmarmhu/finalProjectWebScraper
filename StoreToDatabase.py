@@ -2,9 +2,9 @@ from Libraries import *
 
 class StoreToDatabase:
     def __init__(self):
-        self.databaseName = "finalProject"
-        self.databaseTableName = "finalProjectTable"
-        self.databasePassword = "finalProject2024!"
+        self.databaseName = "<your_database_name>"  # Replace with your actual database name
+        self.databaseTableName = "<your_table_name>"  # Replace with your actual table name
+        self.databasePassword = "<your_password>"  # Replace with your actual database password
         self.connection = self.createConnection()
     def createConnection(self):
         """Create a database connection."""
