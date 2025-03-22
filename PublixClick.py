@@ -6,26 +6,18 @@ class PublixClick(OpenPage):
 
     def clickThrough(self):
         try:
-            # Wait for the dropdown to be present
+     
             WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'search-input')))
-            
-            # Locate the dropdown (select) element
             textArea = self.driver.find_element(By.CLASS_NAME, 'search-input')
             textAreaField = textArea.find_element(By.NAME, 'search')
-            textAreaField.send_keys("28787")
+            textAreaField.send_keys("28787") # weaverville zip code
             button = textArea.find_element(By.CLASS_NAME, 'search-button')
             time.sleep(4)
             button.click()
-            print(f"hrlllas")
             time.sleep(2)
-
-            print("gewq")
-            # Wait for the options to be present
             chooseStoreBtn = self.driver.find_element(By.ID, 'choose_1546')
             chooseStoreBtn.click()
             time.sleep(4)
-            # Select the 'NC' option
-           
             self.driver.get("https://www.publix.com/savings/weekly-ad/view-all")
 
         except Exception as e:
